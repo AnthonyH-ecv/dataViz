@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>radar charts</title>
+    <script rel="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <!--Load the AJAX API-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+
+</head>
+
+
+<style>
+    #marksChart {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+    #add-btn{
+        height: 20px;
+        width: 50px;
+        border: 2px solid;
+        background-color: red;
+    }
+</style>
+
+<body>
+
+    <canvas id="marksChart"></canvas>
+    
+    <button id="add-btn">add</button>
+</body>
+
+<script>
+    $(document).ready(function() {
+                var marksCanvas = document.getElementById("marksChart");
+
+                var marksData = {
+                    labels: ["Html", "CSS", "JS", "PHP", "JAVA", "C"],
+                    datasets: [{
+                        label: "Student A",
+                        backgroundColor: "rgba(200,0,0,0.2)",
+                        data: [65, 50, 30, 30, 20, 20]
+                    }]
+                };
+
+                var radarChart = new Chart(marksCanvas, {
+                    type: 'radar',
+                    data: marksData
+                });
+        $('#add-btn').click(function(){
+            
+            let randomArray = [];
+                
+                for(let i = 0 ; i<=6 ; i++){
+                    randomArray.push(Math.random()*100);
+                }
+            
+            marksData.datasets.push(
+                
+            
+                {
+                        label: "Student"+Math.round(Math.random()*10),
+                        backgroundColor: "rgba(200,200,0,0.2)",
+                        data: randomArray
+                }
+            
+            );
+            radarChart.update();
+            
+        });
+    })
+</script>
+
+</html>
